@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+</head>
+<h1>Rock, Paper, Scissors?</h1>
+<body>
+    <script>
+        function computerPlay() {
+            let computerSelection = ['rock', 'paper', 'scissors'];
+            return computerSelection[Math.round(Math.random() * 2)];
+        };
+
+        let computerSelection = computerPlay();
+
+        let playerSelection = window.prompt("Choose your weapon!");
+         playerSelection = playerSelection.toLowerCase();
+            
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function game() {
+            playRound(playerSelection, computerSelection);
+
+            playerSelection = window.prompt("Choose your weapon!");
+            playerSelection = playerSelection.toLowerCase();
+
+            function playRound(playerSelection, computerSelection) {
+                if (computerSelection === playerSelection){
+                    alert ('A tie.')
+                } else if (computerSelection === 'paper' && playerSelection === 'rock'){
+                    alert ('You lose!');
+                    computerScore ++;
+                } else if (computerSelection === 'scissors' && playerSelection === 'rock'){
+                    alert ('You WIN!');
+                    playerScore ++;
+                } else if (computerSelection === 'rock' && playerSelection === 'paper'){
+                    alert ('You WIN!');
+                    playerScore ++;
+                } else if (computerSelection === 'scissors' && playerSelection === 'paper'){
+                    alert ('You lose!');
+                    computerScore ++;
+                } else if (computerSelection === 'rock' && playerSelection === 'scissors'){
+                    alert ('You lose!');
+                    computerScore ++;
+                } else if (computerSelection === 'paper' && playerSelection === 'scissors'){
+                    alert ('You WIN!');
+                    computerScore ++;
+                } else {
+                    alert ('That is not a valid weapon.');
+                    }
+                };
+            };
+        game();
+        game();
+        game();
+        game();
+        game();
+
+        if (playerScore>computerScore){
+            alert('Congratulations! You have won the game.');
+        } else if (playerScore<computerScore){
+            alert('Condolences. You have lost the game.');
+        } else {
+            alert('It is a tie. Try again.')
+        }
+    </script>
+</body>
+</html>
