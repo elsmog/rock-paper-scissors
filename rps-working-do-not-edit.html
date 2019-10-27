@@ -19,7 +19,7 @@
         let playerScore = 0;
         let computerScore = 0;
 
-        function game() {
+        function playGame() {
             playRound(playerSelection, computerSelection);
 
             playerSelection = window.prompt("Choose your weapon!");
@@ -51,18 +51,21 @@
                     }
                 };
             };
-        game();
-        game();
-        game();
-        game();
-        game();
+        playGame();
+        playGame();
+        playGame();
+        playGame();
+        playGame();
 
         if (playerScore>computerScore){
-            alert('Congratulations! You have won the game.');
+            alert('You scored ' + playerScore + ' points and the computer scored ' +
+                computerScore + '.' + ' Congratulations! You have won the game.');
         } else if (playerScore<computerScore){
-            alert('Condolences. You have lost the game.');
+            alert('You scored ' + playerScore + ' points and the computer scored ' +
+                computerScore + '.' + ' Condolences. You have lost the game.');
         } else {
-            alert('It is a tie. Try again.')
+            alert('You scored ' + playerScore + ' points and the computer scored ' +
+                computerScore + '.' + ' It is a tie. Try again.');
         }
     </script>
 </body>
