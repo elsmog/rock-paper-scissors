@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock Paper Scissors</title>
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all">
 </head>
-<h1>Rock, Paper, Scissors?</h1>
 <body>
+  <h1 class="h1">Rock, Paper, Scissors?</h1>
+  <div id="greeting" class="greeting">
+    <p1>Welcome! Would you like to play a game?</p1><br>
+  </div>
+  <div class="button">
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+  </div>
     <script>
-        function computerPlay() {
-            let computerSelection = ['rock', 'paper', 'scissors'];
-            return computerSelection[Math.round(Math.random() * 2)];
-        };
-
-        let computerSelection = computerPlay();
-
-        let playerSelection = window.prompt("Choose your weapon!");
-         playerSelection = playerSelection.toLowerCase();
-            
-        let playerScore = 0;
-        let computerScore = 0;
-
-        function playGame() {
-            playRound(playerSelection, computerSelection);
-
-            playerSelection = window.prompt("Choose your weapon!");
-            playerSelection = playerSelection.toLowerCase();
-
-            function playRound(playerSelection, computerSelection) {
-                if (computerSelection === playerSelection){
-                    alert ('A tie.')
-                } else if (computerSelection === 'paper' && playerSelection === 'rock'){
-                    alert ('You lose!');
-                    computerScore ++;
-                } else if (computerSelection === 'scissors' && playerSelection === 'rock'){
-                    alert ('You WIN!');
-                    playerScore ++;
-                } else if (computerSelection === 'rock' && playerSelection === 'paper'){
-                    alert ('You WIN!');
-                    playerScore ++;
-                } else if (computerSelection === 'scissors' && playerSelection === 'paper'){
-                    alert ('You lose!');
-                    computerScore ++;
-                } else if (computerSelection === 'rock' && playerSelection === 'scissors'){
-                    alert ('You lose!');
-                    computerScore ++;
-                } else if (computerSelection === 'paper' && playerSelection === 'scissors'){
-                    alert ('You WIN!');
-                    computerScore ++;
-                } else {
-                    alert ('That is not a valid weapon.');
-                    }
-                };
-            };
-        playGame();
-        playGame();
-        playGame();
-        playGame();
-        playGame();
-
-        if (playerScore>computerScore){
-            alert('You scored ' + playerScore + ' points and the computer scored ' +
-                computerScore + '.' + ' Congratulations! You have won the game.');
-        } else if (playerScore<computerScore){
-            alert('You scored ' + playerScore + ' points and the computer scored ' +
-                computerScore + '.' + ' Condolences. You have lost the game.');
+      let playerScore = 0;
+      let computerScore = 0;
+      let roundsPlayed = 0;
+        
+      function computerPlay() {
+        return ['rock', 'paper', 'scissors'][Math.round(Math.random() * 2)];
+      };
+    
+      function playRound(playerSelection, computerSelection) {
+        if (computerSelection === playerSelection){
+            document.getElementById("greeting").textContent = "A tie.";
+            console.log ("Computer score - " + computerScore + 
+                " and player score - " + playerScore);
+        } else if ((computerSelection === 'paper' && playerSelection === 'rock') ||
+                  (computerSelection === 'scissors' && playerSelection === 'paper') ||
+                  (computerSelection === 'rock' && playerSelection === 'scissors')) {
+            computerScore++;
+            document.getElementById("greeting").textContent = "An inferior choice.";
+            console.log ("Computer score - " + computerScore + 
+                " and player score - " + playerScore);
         } else {
-            alert('You scored ' + playerScore + ' points and the computer scored ' +
-                computerScore + '.' + ' It is a tie. Try again.');
-        }
+            playerScore++;
+            document.getElementById("greeting").textContent = "A superior choice!";
+            console.log ("Computer score - " + computerScore + 
+                " and player score - " + playerScore);
+        };    
+      };
+
+      document.getElementById('rock').addEventListener('click', playGame);
+      document.getElementById('paper').addEventListener('click', playGame);
+      document.getElementById('scissors').addEventListener('click', playGame);
+
+      function playGame() {
+          roundsPlayed++;
+          if (roundsPlayed < 5) {
+           playRound(this.id, computerPlay());
+          } else {
+            if (playerScore > computerScore) {
+              document.getElementById("greeting").textContent = 'Congratulations! You have won the game.';
+              console.log ("Computer score - " + computerScore +
+                  " and player score - " + playerScore);
+            } else if (computerScore > playerScore) {
+              document.getElementById("greeting").textContent ='Condolences. You have lost the game.';
+              console.log ("Computer score - " + computerScore +
+                  " and player score - " + playerScore);
+            } else {
+              document.getElementById("greeting").textContent = 'You have reached an impasse. Try again.';
+              console.log ("Computer score - " + computerScore +
+                  " and player score - " + playerScore);
+            };
+         };
+      };
+      
     </script>
 </body>
 </html>
